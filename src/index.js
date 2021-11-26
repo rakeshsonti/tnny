@@ -34,9 +34,8 @@ const generateUniqueKey=function(){
     console.log(str);
     return str;
 }
- app.get("/getUrl",async (req,res)=>{
-     console.log("get url")
-     const {url}=req.query;
+ app.post("/getUrl",async (req,res)=>{
+     const {url}=req.body;
      if(url===undefined||url===null){
         res.send({url:"Invalid url"});
     }else{
@@ -61,7 +60,7 @@ const generateUniqueKey=function(){
                  }
             }
             // let newGenUrl=req.protocol+"://"+req.hostname+":"+3000+"/"+hashcode;
-            let newGenUrl="https://tnny.herokuapp.com/"+hashcode;
+            let newGenUrl="https://tnny.herokuapp.com/u/"+hashcode;
             console.log("new gen url:: ",newGenUrl);
              const newUser = new user({
                 url,
@@ -75,11 +74,12 @@ const generateUniqueKey=function(){
     }
  })
  
-app.get("/",async (req,res)=>{
+app.get("*/u/*",async (req,res)=>{
     console.log("server is heated");
-    const {newUrl}=req.query;
+    const newUrl="https://tnny.herokuapp.com"+req.originalUrl;
+    console.log(req.originalUrl);
     
-    if(newUrl===undefined||newUrl===null){
+    if(req.originalUrl===undefined||req.originalUrl===null){
         res.send({url:"Invalid url"});
     }else{
     const curr_url = await user.find({
