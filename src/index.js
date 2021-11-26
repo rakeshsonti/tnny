@@ -60,8 +60,9 @@ const generateUniqueKey=function(){
                     break;
                  }
             }
-            let newGenUrl=req.protocol+"://"+req.hostname+":"+3000+"/"+hashcode;
-            console.log(newGenUrl);
+            // let newGenUrl=req.protocol+"://"+req.hostname+":"+3000+"/"+hashcode;
+            let newGenUrl="https://tnny.herokuapp.com/"+hashcode;
+            console.log("new gen url:: ",newGenUrl);
              const newUser = new user({
                 url,
                 newUrl:newGenUrl,
